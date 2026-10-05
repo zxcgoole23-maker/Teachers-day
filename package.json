@@ -1,0 +1,1 @@
+{  "name": "teachers-day-card",  "version": "1.0.0",  "description": "A Teachers' Day thank-you page for a mentor",  "main": "server.js",  "scripts": {    "start": "node server.js"  },  "engines": {    "node": ">=18"  }}
