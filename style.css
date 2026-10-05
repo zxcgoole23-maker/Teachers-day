@@ -1,0 +1,238 @@
+/* Concept: an exercise-book page, graded in red pen by the students */
+:root {
+  --paper: #EDF3F8;
+  --rule: #C9D8E6;
+  --margin: #E7A3A8;
+  --ink: #1B2A4A;
+  --pen: #D7263D;
+  --marker: #FFE45E;
+  --card: #FFFFFF;
+  --font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-pen: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  background-color: var(--paper);
+  /* ruled lines every 2rem + red margin line */
+  background-image:
+    linear-gradient(90deg, transparent 3.2rem, var(--margin) 3.2rem, var(--margin) calc(3.2rem + 2px), transparent calc(3.2rem + 2px)),
+    repeating-linear-gradient(transparent 0, transparent calc(2rem - 1px), var(--rule) calc(2rem - 1px), var(--rule) 2rem);
+}
+
+.page {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 3rem 5rem;
+}
+
+.pen { font-family: var(--font-pen); font-weight: 700; color: var(--pen); }
+
+h1, h2 { font-weight: 600; line-height: 1.15; margin: 0 0 1rem; }
+h1 { font-size: clamp(2.4rem, 7vw, 4rem); }
+h2 { font-size: 1.7rem; }
+
+section { margin-top: 4rem; }
+
+/* Hero */
+.date { font-size: 1.6rem; margin: 0 0 .5rem; }
+#mentor-name { font-size: 1.15em; }
+.lead { font-size: 1.3rem; max-width: 34rem; }
+
+.grade {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.grade-mark {
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  font-size: 4.5rem;
+  line-height: 1;
+  border: 5px solid var(--pen);
+  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%; /* hand-drawn circle */
+  transform: rotate(-8deg);
+  animation: stamp .6s .4s cubic-bezier(.3, 1.6, .5, 1) both; /* the one entrance moment */
+}
+.grade-note { font-size: 1.9rem; transform: rotate(-3deg); }
+
+@keyframes stamp {
+  from { opacity: 0; transform: rotate(-8deg) scale(2.4); }
+  to   { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+
+/* Report card */
+.card {
+  background: var(--card);
+  padding: 1.5rem 1.75rem;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: .35rem 0; text-align: left; border-bottom: 1px dashed var(--rule); }
+th { font-weight: 400; }
+td { text-align: right; font-size: 1.7rem; line-height: 1.3; }
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+
+/* Letter */
+.letter p { max-width: 36rem; margin: 0 0 2rem; }
+mark { background: linear-gradient(transparent 20%, var(--marker) 20%, var(--marker) 90%, transparent 90%); color: inherit; padding: 0 .15em; }
+.sign { font-size: 1.8rem; line-height: 1.3; }
+
+/* Wishes */
+form { display: grid; gap: .4rem; max-width: 30rem; }
+label { font-weight: 600; font-size: 1rem; }
+input, textarea {
+  width: 100%;
+  padding: .6rem .75rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+textarea { resize: vertical; }
+
+button {
+  justify-self: start;
+  margin-top: .75rem;
+  padding: .6rem 1.5rem;
+  font: 600 1.05rem var(--font-body);
+  color: #fff;
+  background: var(--pen);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 var(--ink);
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+button:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+button:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.status { min-height: 1.7rem; margin: .25rem 0 0; font-size: 1rem; }
+
+.wishes { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1rem; }
+.wishes li { background: var(--card); padding: .75rem 1.25rem; border-left: 5px solid var(--pen); border-radius: 2px; }
+.wishes li p { margin: 0; overflow-wrap: anywhere; }
+.wishes li span { font-size: 1.5rem; }
+.wishes .empty { background: transparent; border-left-color: var(--rule); font-style: italic; }
+
+footer { margin-top: 4rem; text-align: center; font-size: 2.2rem; }
+
+/* Mobile */
+@media (max-width: 560px) {
+  body { font-size: 1.05rem; background-image:
+    linear-gradient(90deg, transparent 1.2rem, var(--margin) 1.2rem, var(--margin) calc(1.2rem + 2px), transparent calc(1.2rem + 2px)),
+    repeating-linear-gradient(transparent 0, transparent calc(2rem - 1px), var(--rule) calc(2rem - 1px), var(--rule) 2rem); }
+  .page { padding: 2rem 1rem 2rem 2rem; }
+  .grade { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .grade-mark { animation: none; }
+  button { transition: none; }
+}
+
+/* Language toggle */
+.lang-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  margin: 0;
+  padding: .4rem 1rem;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--marker);
+}
+
+/* Russian: Newsreader has no Cyrillic, so use PT Serif for body text */
+html[lang="ru"] { --font-body: 'PT Serif', Georgia, 'Times New Roman', serif; }
+html[lang="ru"] body { line-height: 1.65; }
+html[lang="ru"] h1 { font-size: clamp(2.2rem, 6.5vw, 3.5rem); }
+
+/* ---- Interactive pieces ---- */
+
+/* Grade stamp is now a button: strip the default button look */
+button.grade, button.grade:hover, button.grade:active {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  transform: none;
+  cursor: pointer;
+}
+.hint { margin: .5rem 0 0; font-size: 1.4rem; }
+
+.confetti {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* Lessons: a sticky note that swaps when you ask for another */
+.note {
+  max-width: 30rem;
+  min-height: 6rem;
+  margin: 0 0 1.5rem;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.35rem;
+  font-style: italic;
+  background: var(--marker);
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(-1.5deg);
+}
+.note.swap { animation: peel .35s ease-out; }
+@keyframes peel {
+  from { opacity: 0; transform: rotate(3deg) translateY(-12px); }
+  to   { opacity: 1; transform: rotate(-1.5deg); }
+}
+
+/* Flowers */
+.flower-count { margin: .75rem 0 0; font-size: 1.7rem; }
+
+/* Guestbook helpers */
+.counter { margin: 0; font-size: .9rem; text-align: right; }
+.chips-label { margin: .5rem 0 0; font-size: 1rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+button.chip, button.chip:hover {
+  margin: 0;
+  padding: .3rem .9rem;
+  font: 400 .95rem var(--font-body);
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: left;
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: none;
+  transform: none;
+}
+button.chip:hover { background: var(--marker); }
+
+@media (prefers-reduced-motion: reduce) {
+  .note.swap { animation: none; }
+}
